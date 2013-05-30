@@ -13,7 +13,7 @@ class Bot
 		self.muc = Jabber::MUC::SimpleMUCClient.new(client)
 		Jabber.debug = true if Jabber.logger = config[:debug]
 
-        self
+		self
 	end
 
 	def connect
@@ -21,7 +21,7 @@ class Bot
 		client.auth(config[:password])
 		client.send(Jabber::Presence.new.set_type(:available))
 
-        self
+		self
 	end
 
     def idle
