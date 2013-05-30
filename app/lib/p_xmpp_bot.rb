@@ -1,7 +1,9 @@
 require 'rubygems'
+require 'bundler/setup'
+require 'yaml'
+require 'logger'
 require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
-require 'yaml'
 
 class Bot
 
