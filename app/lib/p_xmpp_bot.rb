@@ -12,8 +12,7 @@ class Bot
         self.client = Jabber::Client.new(config[:jid])
         Jabber.debug = true if Jabber.logger = config[:debug]
 
-        self
-    end
+        self    end
 
     def connect
         client.connect
@@ -34,14 +33,14 @@ class Bot
         end
     end
 
-
     def process(command)
         case command
         when 'weather'
+
             require_relative 'p_xmpp_bot/weather/wetterochs';
             return Wetterochs.new.getCurrentMail
         else
-            return 'Hallo ich bin der Zauberbot ich kann ein paar coole Dinge schau doch mal ;)'
+            return 'Things I can do for you: weather'
         end
     end
 
