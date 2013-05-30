@@ -9,17 +9,16 @@ class Bot
 
 	def initialize(config)
 		self.config = config
-		self.client = Jabber::Client.new(config['jid'])
+		self.client = Jabber::Client.new(config[:jid])
 		self.muc = Jabber::MUC::SimpleMUCClient.new(client)
+		Jabber.debug = true if Jabber.logger = config[:debug]
 
-		if Jabber.logger = config['debug']
-            Jabber.debug = true
-        end
+        self
 	end
 
 	def connect
 		client.connect
-		client.auth(config['password'])
+		client.auth(config[:password])
 		client.send(Jabber::Presence.new.set_type(:available))
 
         self
@@ -33,7 +32,7 @@ end
 
 
 config = YAML.load_file('../config/jabber.yml');
-config['debug'] = Logger.new(STDOUT)
+config[:debug] = Logger.new(STDOUT)
 
 Bot.new(config).connect.idle
 
