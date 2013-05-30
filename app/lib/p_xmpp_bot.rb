@@ -28,8 +28,20 @@ class Bot
         client.add_message_callback do |message|
             response = Jabber::Message.new(message.from)
             response.type=:chat
-            response.body = 'Hi'
+            output = process(message.body.to_s)
+            response.body = output
             client.send(response)
+        end
+    end
+
+
+    def process(command)
+        case command
+        when 'weather'
+            require_relative 'p_xmpp_bot/weather/wetterochs';
+            return Wetterochs.new.getCurrentMail
+        else
+            return 'Hallo ich bin der Zauberbot ich kann ein paar coole Dinge schau doch mal ;)'
         end
     end
 
